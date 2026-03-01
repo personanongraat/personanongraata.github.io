@@ -20,9 +20,7 @@ function showOutput() {
   resultDiv.innerHTML = "";
   bitcoinData.forEach(function (item, index) {
     resultDiv.innerHTML +=
-      index +
-      1 +
-      ") amount: " +
+      " amount: " +
       item.buyPrice +
       " price: " +
       item.amount +
@@ -40,3 +38,4 @@ window.onload = function () {
 };
 
 saveBtn.addEventListener("click", saveData);
+
