@@ -1,0 +1,17 @@
+.firstscreen {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+.currency {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 2rem;
+}
+textarea {
+  border-color: black;
+  border-radius: 1px;
+}
+input {
+  height: 60px;
+}
