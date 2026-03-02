@@ -1,17 +1,29 @@
+body {
+  margin-left: 10px;
+}
 .firstscreen {
   display: flex;
   justify-content: center;
   font-size: 2rem;
 }
+
 .currency {
   display: flex;
-  justify-content: flex-start;
+  align-items: center; /* выравнивание по одной линии */
+  gap: 15px; /* расстояние между элементами */
   font-size: 2rem;
+  margin-bottom: 20px;
 }
-textarea {
-  border-color: black;
-  border-radius: 1px;
+
+.currency h3 {
+  margin: 0; /* убираем стандартные отступы */
+  font-size: 2rem; /* одинаковый размер */
 }
-input {
-  height: 60px;
+
+.currency input,
+.currency button {
+  height: 50px; /* одинаковая высота */
+  font-size: 1.2rem; /* одинаковый текст */
+  padding: 0 10px;
+  border-radius: 5px;
 }
