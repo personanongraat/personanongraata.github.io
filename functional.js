@@ -3,6 +3,7 @@ const amountInput = document.getElementById("amount");
 const saveBtn = document.getElementById("saveBtn");
 const deleteBtn = document.getElementById("deleteBtn");
 const resultDiv = document.getElementById("result");
+const average = document.getElementById("average");
 let bitcoinData = [];
 bitcoinData.push(
   { amount: 0.010057, buyPrice: 87700 },
@@ -19,6 +20,7 @@ bitcoinData.push(
   { amount: 0.011967, buyPrice: 64235 },
 );
 showOutput();
+showAverage();
 
 function saveData() {
   const buyPrice = parseFloat(buyPriceInput.value);
@@ -33,11 +35,15 @@ function saveData() {
   };
   bitcoinData.push(data);
   localStorage.setItem("bitcoinData", JSON.stringify(bitcoinData));
+  buyPriceInput.value = "";
+  amountInput.value = "";
   showOutput();
+  showAverage();
 }
 function deleteData() {
   bitcoinData.pop();
   showOutput();
+  showAverage();
 }
 
 function showOutput() {
@@ -47,6 +53,14 @@ function showOutput() {
       " amount: " + item.buyPrice + " price: " + item.amount + " $ <br>";
   });
 }
+function showAverage() {
+let total = 0;
+bitcoinData.forEach(function(item){
+  total + item.buyPrice;
+});
+  let average = total / bitcoinData.lenght;
+  averageDiv.innerHTML = "average buy price = " + average.toFixed(2) + " $";
+}
 
 window.onload = function () {
   const savedData = localStorage.getItem("bitcoinData");
@@ -54,8 +68,10 @@ window.onload = function () {
   if (savedData) {
     bitcoinData = JSON.parse(savedData);
     showOutput();
+    showAverage();
   }
 };
 deleteBtn.addEventListener("click", deleteData);
 saveBtn.addEventListener("click", saveData);
+
 
