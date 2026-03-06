@@ -4,7 +4,9 @@ const saveBtn = document.getElementById("saveBtn");
 const deleteBtn = document.getElementById("deleteBtn");
 const resultDiv = document.getElementById("result");
 const averageDiv = document.getElementById("average");
+
 let bitcoinData = [];
+
 bitcoinData.push(
   { amount: 0.010057, buyPrice: 87700 },
   { amount: 0.001388, buyPrice: 72000 },
@@ -45,12 +47,15 @@ function deleteData() {
   showOutput();
   showAverage();
 }
+
 function showAverage() {
-let total = 0;
-bitcoinData.forEach(function(item){
-  total + item.buyPrice;
-});
+  let total = 0;
+
+  bitcoinData.forEach(function (item) {
+    total += item.buyPrice;
+  });
   let average = total / bitcoinData.length;
+
   averageDiv.innerHTML = "average buy price = " + average.toFixed(2) + " $";
 }
 
