@@ -44,6 +44,7 @@ function saveData() {
 }
 function deleteData() {
   bitcoinData.pop();
+  localStorage.setItem("bitcoinData", JSON.stringify(bitcoinData));
   showOutput();
   showAverage();
 }
@@ -63,7 +64,7 @@ function showOutput() {
   resultDiv.innerHTML = "";
   bitcoinData.forEach(function (item, index) {
     resultDiv.innerHTML +=
-      " amount: " + item.buyPrice + " price: " + item.amount + " $ <br>";
+      " amount: " + item.amount + " price: " + item.buyPrice + " $ <br>";
   });
 }
 
@@ -78,6 +79,7 @@ window.onload = function () {
 };
 deleteBtn.addEventListener("click", deleteData);
 saveBtn.addEventListener("click", saveData);
+
 
 
 
