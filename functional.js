@@ -45,6 +45,14 @@ function deleteData() {
   showOutput();
   showAverage();
 }
+function showAverage() {
+let total = 0;
+bitcoinData.forEach(function(item){
+  total + item.buyPrice;
+});
+  let average = total / bitcoinData.length;
+  averageDiv.innerHTML = "average buy price = " + average.toFixed(2) + " $";
+}
 
 function showOutput() {
   resultDiv.innerHTML = "";
@@ -52,14 +60,6 @@ function showOutput() {
     resultDiv.innerHTML +=
       " amount: " + item.buyPrice + " price: " + item.amount + " $ <br>";
   });
-}
-function showAverage() {
-let total = 0;
-bitcoinData.forEach(function(item){
-  total + item.buyPrice;
-});
-  let average = total / bitcoinData.lenght;
-  averageDiv.innerHTML = "average buy price = " + average.toFixed(2) + " $";
 }
 
 window.onload = function () {
@@ -73,5 +73,6 @@ window.onload = function () {
 };
 deleteBtn.addEventListener("click", deleteData);
 saveBtn.addEventListener("click", saveData);
+
 
 
