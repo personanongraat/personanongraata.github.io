@@ -3,7 +3,7 @@ const amountInput = document.getElementById("amount");
 const saveBtn = document.getElementById("saveBtn");
 const deleteBtn = document.getElementById("deleteBtn");
 const resultDiv = document.getElementById("result");
-const average = document.getElementById("average");
+const averageDiv = document.getElementById("average");
 let bitcoinData = [];
 bitcoinData.push(
   { amount: 0.010057, buyPrice: 87700 },
@@ -73,6 +73,7 @@ window.onload = function () {
 };
 deleteBtn.addEventListener("click", deleteData);
 saveBtn.addEventListener("click", saveData);
+
 
 
 
