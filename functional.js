@@ -4,10 +4,19 @@ const saveBtn = document.getElementById("saveBtn");
 const deleteBtn = document.getElementById("deleteBtn");
 const resultDiv = document.getElementById("result");
 const averageDiv = document.getElementById("average");
+const assetSelect = document.getElementById("assetSelect");
+const assetTitle = document.getElementById("assetTitle");
+//объект с массивами для ASSетов
+let assets = {
+  BTC: [],
+  USD: [],
+  EURO: [],
+  GOLD: [],
+};
+let currentAsset = "BTC";
 
-let bitcoinData = [];
-
-bitcoinData.push(
+// пушим в массив стартовые значения
+assets.BTC.push(
   { amount: 0.010057, buyPrice: 87700 },
   { amount: 0.001388, buyPrice: 72000 },
   { amount: 0.006702, buyPrice: 71776 },
@@ -23,7 +32,7 @@ bitcoinData.push(
 );
 showOutput();
 showAverage();
-
+//сохранение данных в локальное хранилище
 function saveData() {
   const buyPrice = parseFloat(buyPriceInput.value);
   const amount = parseFloat(amountInput.value);
@@ -35,44 +44,80 @@ function saveData() {
     buyPrice: buyPrice,
     amount: amount,
   };
-  bitcoinData.push(data);
-  localStorage.setItem("bitcoinData", JSON.stringify(bitcoinData));
+  assets[currentAsset].push(data);
+
+  // сохраняем все активы
+  localStorage.setItem("assets", JSON.stringify(assets));
+
   buyPriceInput.value = "";
   amountInput.value = "";
-  showOutput();
-  showAverage();
-}
-function deleteData() {
-  bitcoinData.pop();
-  localStorage.setItem("bitcoinData", JSON.stringify(bitcoinData));
-  showOutput();
-  showAverage();
-}
 
+  showOutput();
+  showAverage();
+}
+// удаление последней записи
+function deleteData() {
+  assets[currentAsset].pop();
+  localStorage.setItem("assets", JSON.stringify(assets));
+  showOutput();
+  showAverage();
+}
+//выборочное удаление
+function deleteItem(index) {
+  assets[currentAsset].splice(index, 1);
+
+  localStorage.setItem("assets", JSON.stringify(assets));
+
+  showOutput();
+  showAverage();
+}
+// просчет и вывод средней цены покупки
 function showAverage() {
   let total = 0;
 
-  bitcoinData.forEach(function (item) {
+  assets[currentAsset].forEach(function (item) {
     total += item.buyPrice;
   });
-  let average = total / bitcoinData.length;
+  let average = total / assets[currentAsset].length;
 
   averageDiv.innerHTML = "average buy price = " + average.toFixed(2) + " $";
 }
-
+// вывод данных
 function showOutput() {
   resultDiv.innerHTML = "";
-  bitcoinData.forEach(function (item, index) {
-    resultDiv.innerHTML +=
-      " amount: " + item.amount + " price: " + item.buyPrice + " $ <br>";
+
+  assets[currentAsset].forEach(function (item, index) {
+    const row = document.createElement("div");
+
+    row.innerHTML =
+      "amount: " + item.amount + " price: " + item.buyPrice + " $ ";
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "➖";
+
+    deleteBtn.addEventListener("click", function () {
+      deleteItem(index);
+    });
+
+    row.appendChild(deleteBtn);
+
+    resultDiv.appendChild(row);
   });
 }
+// смена актива
+assetSelect.addEventListener("change", function () {
+  currentAsset = assetSelect.value;
+  assetTitle.innerText = currentAsset;
 
+  showOutput();
+  showAverage();
+});
+// обновление данных
 window.onload = function () {
-  const savedData = localStorage.getItem("bitcoinData");
+  const savedData = localStorage.getItem("assets");
 
   if (savedData) {
-    bitcoinData = JSON.parse(savedData);
+    assets = JSON.parse(savedData);
     showOutput();
     showAverage();
   }
