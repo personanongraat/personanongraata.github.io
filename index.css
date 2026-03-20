@@ -5,44 +5,83 @@
 }
 body {
   margin-left: 0px;
+
+  margin: 0 auto;
 }
 header {
   width: 100%;
   font-size: 30px;
+  color: white;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 10px;
+
+  background-color: #222;
 }
 header button {
   font-size: 20px;
-  background-color: white;
+  color: white;
   cursor: pointer;
-  border: none;
 }
 
-.firstscreen {
+.ticker {
   display: flex;
-  justify-content: center;
-  font-size: 2rem;
+  width: 100%;
+  justify-content: space-around;
+  padding: 10px;
+  background: #222;
+  color: white;
+}
+#ticker {
+  overflow: hidden;
+  width: 100%;
+  background: #222;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
+#tickerContent {
+  display: flex;
+  gap: 50px;
+  white-space: nowrap;
+
+  animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-120%);
+  }
+}
 .currency {
   display: flex;
-  align-items: center; /* выравнивание по одной линии */
-  gap: 15px; /* расстояние между элементами */
+  align-items: center; 
+  gap: 15px; 
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
 .currency h3 {
-  margin: 0; /* убираем стандартные отступы */
-  font-size: 2rem; /* одинаковый размер */
+  margin: 0; 
+  font-size: 2rem;
 }
 
 .currency input,
 .currency button {
-  height: 50px; /* одинаковая высота */
-  font-size: 1.2rem; /* одинаковый текст */
+  height: 50px; 
+  font-size: 1.2rem; 
   padding: 0 10px;
   border-radius: 5px;
+}
+#result div {
+  font-size: 1.5rem;
+}
+#average {
+  font-size: 1.5rem;
+}
+#assetSelect {
+  font-size: 2.5rem;
 }
