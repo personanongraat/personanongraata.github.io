@@ -6,6 +6,9 @@ const resultDiv = document.getElementById("result");
 const averageDiv = document.getElementById("average");
 const assetSelect = document.getElementById("assetSelect");
 const assetTitle = document.getElementById("assetTitle");
+const tickerDiv = document.getElementById("ticker");
+const tickerContent = document.getElementById("tickerContent");
+
 //объект с массивами для ASSетов
 let assets = {
   BTC: [],
@@ -15,7 +18,7 @@ let assets = {
 };
 let currentAsset = "BTC";
 
-// пушим в массив стартовые значения
+//пушим в массив стартовые значения
 assets.BTC.push(
   { amount: 0.010057, buyPrice: 87700 },
   { amount: 0.001388, buyPrice: 72000 },
@@ -32,28 +35,32 @@ assets.BTC.push(
 );
 showOutput();
 showAverage();
+runLine();
+
 //сохранение данных в локальное хранилище
 function saveData() {
-  const buyPrice = parseFloat(buyPriceInput.value);
   const amount = parseFloat(amountInput.value);
-  if (isNaN(buyPrice) || isNaN(amount)) {
+  const buyPrice = parseFloat(buyPriceInput.value);
+
+  if (isNaN(amount) || isNaN(buyPrice)) {
     alert("Заполните поля");
     return;
   }
   const data = {
-    buyPrice: buyPrice,
     amount: amount,
+    buyPrice: buyPrice,
   };
   assets[currentAsset].push(data);
 
   // сохраняем все активы
   localStorage.setItem("assets", JSON.stringify(assets));
 
-  buyPriceInput.value = "";
   amountInput.value = "";
+  buyPriceInput.value = "";
 
   showOutput();
   showAverage();
+  runLine();
 }
 // удаление последней записи
 function deleteData() {
@@ -61,6 +68,7 @@ function deleteData() {
   localStorage.setItem("assets", JSON.stringify(assets));
   showOutput();
   showAverage();
+  runLine();
 }
 //выборочное удаление
 function deleteItem(index) {
@@ -70,6 +78,7 @@ function deleteItem(index) {
 
   showOutput();
   showAverage();
+  runLine();
 }
 // просчет и вывод средней цены покупки
 function showAverage() {
@@ -104,13 +113,30 @@ function showOutput() {
     resultDiv.appendChild(row);
   });
 }
+//бугущая строка
+function runLine() {
+  tickerContent.innerHTML = "";
+
+  Object.keys(assets).forEach((key) => {
+    let total = 0;
+
+    assets[key].forEach((item) => {
+      total += item.amount;
+    });
+
+    const itemDiv = document.createElement("div");
+    itemDiv.textContent = `${key}: ${total.toFixed(3)}`;
+
+    tickerContent.appendChild(itemDiv);
+  });
+}
 // смена актива
 assetSelect.addEventListener("change", function () {
   currentAsset = assetSelect.value;
-  assetTitle.innerText = currentAsset;
 
   showOutput();
   showAverage();
+  runLine();
 });
 // обновление данных
 window.onload = function () {
@@ -120,10 +146,12 @@ window.onload = function () {
     assets = JSON.parse(savedData);
     showOutput();
     showAverage();
+    runLine();
   }
 };
 deleteBtn.addEventListener("click", deleteData);
 saveBtn.addEventListener("click", saveData);
+
 
 
 
