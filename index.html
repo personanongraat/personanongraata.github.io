@@ -7,25 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assets</title>
   </head>
-  <header>
-    <select id="assetSelect">
-      <option value="BTC">BTC</option>
-      <option value="USD">USD</option>
-      <option value="EURO">EURO</option>
-      <option value="GOLD">GOLD</option>
-    </select>
-
-    <h1>Assets</h1>
-
-    <button>menu</button>
-    <button>calculator</button>
-  </header>
   <body>
-    <!-- <div class="firstscreen">
+    <header>
+      <!-- <select id="assetSelect">
+        <option value="BTC">BTC</option>
+        <option value="USD">USD</option>
+        <option value="EURO">EURO</option>
+        <option value="GOLD">GOLD</option>
+      </select> -->
       <h1>Assets</h1>
-    </div> -->
+    </header>
+    <div id="ticker">
+      <div id="tickerContent"></div>
+    </div>
+
     <div class="currency" id="bitcoin">
-      <h3 id="assetTitle">BTC</h3>
+      <!-- <h3 id="assetTitle">BTC</h3> -->
+      <select id="assetSelect">
+        <option value="BTC">BTC</option>
+        <option value="USD">USD</option>
+        <option value="EURO">EURO</option>
+        <option value="GOLD">GOLD</option>
+      </select>
       <input type="number" id="amount" placeholder="amount" />
       <input type="number" id="buyPrice" placeholder="price" />
       <button id="saveBtn">save</button>
@@ -37,7 +40,6 @@
     <div id="average"></div>
   </body>
 </html>
-
 
 
 
