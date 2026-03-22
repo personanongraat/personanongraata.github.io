@@ -98,8 +98,10 @@ function showOutput() {
   assets[currentAsset].forEach(function (item, index) {
     const row = document.createElement("div");
 
-    row.innerHTML =
-      "amount: " + item.amount + " price: " + item.buyPrice + " $ ";
+    row.innerHTML = `
+  <span class="amount">amount: ${item.amount}</span>
+  <span class="price">price: ${item.buyPrice} $</span>
+`;
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "➖";
