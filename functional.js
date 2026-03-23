@@ -130,6 +130,7 @@ function runLine() {
     itemDiv.textContent = `${key}: ${total.toFixed(3)}`;
 
     tickerContent.appendChild(itemDiv);
+    tickerContent.innerHTML = content + content;
   });
 }
 // смена актива
