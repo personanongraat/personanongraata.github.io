@@ -53,7 +53,7 @@ header button {
     transform: translateX(100%);
   }
   to {
-    transform: translateX(-120%);
+    transform: translateX(-100%);
   }
 }
 .currency {
@@ -89,6 +89,9 @@ header button {
   #deleteBtn {
     display: none;
   }
+  /* #result div {
+    font-size: 10vh;
+  } */
 }
 @media (max-width: 768px) {
   .currency {
@@ -101,12 +104,13 @@ header button {
     gap: rem;
     padding: rem;
 
-    background: #222; /* важно, чтобы перекрывал фон */
+    background: #222; 
     z-index: 1000;
   }
 
-  #result div {
-  }
+  /* #result div {
+    font-size: 10vh;
+  } */
 
   #result span {
   }
@@ -116,13 +120,20 @@ header button {
     min-width: 0;
   }
   #assetSelect {
-    font-size: clamp(14px, 2.5vw, 40px); /* адаптивный текст */
+    font-size: clamp(30px, 2.5vw, 40px); 
   }
 
   #saveBtn {
     flex: 0 0 auto;
   }
   body {
-    padding-bottom: 70px; /* высота панели */
+    padding-bottom: 70px; 
+  }
+}
+@media (max-width: 582px) {
+  #result div,
+  #average {
+    font-size: 6.5vw;
+    justify-content: center;
   }
 }
